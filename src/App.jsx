@@ -1,31 +1,37 @@
 import { useState } from 'react'
 import './App.css'
-import Lincoln from './components/Lincoln';
+import { puppyList } from './data.js';
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [bestDog, setBestDog] = useState (null)
-console.log(bestDog);
+  const [puppies, setPuppies] = useState(puppyList);
+  const [featPupId, setFeatPupId] = useState(null);
+  const featuredPup = puppies.find((pup)=> pup.id === featPupId);
 
-const dogs = [
-  { name: "Logan", breed: "Italian Greyhound", age: 14 },
-  { name: "Chase", breed: "Italian Greyhound", age: 12 },
-  { name: "Lincoln", breed: "Mixed Rescure", age: 5 },
-];
+console.log("puppyList: ", puppyList);
+
 
   return (
     <>
-      <h1>Vite + React</h1>
-      {/* <h2>{bestDog} is the best dog!</h2> */}
-      {bestDog ? <h2>{bestDog} is the best dog!</h2> : null}
-      {dogs.map((dog) => {
-  return <p key={dog.name}onClick={() => setBestDog(dog.name)}>{dog.name} is a {dog.age} year old {dog.breed}.</p>;
-})}
+      <h1>Puppy Pal:</h1>
 
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          Lincoln says the count is {count}
-        </button>
+      <div className="App">
+      {featPupId && (
+        <div>
+          <h2>{featuredPup.name}</h2>
+          <ul>
+            <li>Age: {featuredPup.age}</li>
+            <li>Email: {featuredPup.email}</li>
+          </ul>
+        </div>
+      )}
+      { 
+          puppies.map((puppy) => {
+            return <p
+            onClick={() => {setFeatPupId(puppy.id)}} key={puppy.id}>{puppy.name}</p>;
+          })
+      }
       </div>
     </>
   )

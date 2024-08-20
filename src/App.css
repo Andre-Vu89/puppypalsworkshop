@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+.App {
+  color: rgb(4, 0, 255);
+  background-color: antiquewhite;
+}
